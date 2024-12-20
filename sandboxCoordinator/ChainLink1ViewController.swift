@@ -7,13 +7,21 @@
 
 import UIKit
 
-protocol ChainLinkViewControllerDelegate: AnyObject {
-    func chainLinkControllerDidFinish(_ sender: ChainLinkViewController)
+protocol ChainLink1ViewControllerDelegate: AnyObject {
+    func chainLink1ControllerDidFinish(_ sender: UIViewController)
 }
 
-class ChainLinkViewController: UIViewController {
+class ChainLink1ViewController: UIViewController {
     
-    weak var delegate: ChainLinkViewControllerDelegate?
+    weak var delegate: ChainLink1ViewControllerDelegate?
+    
+    var header: UILabel = {
+        let label = UILabel()
+        label.text = "Chain Link 1"
+        label.font = .systemFont(ofSize: 32, weight: .bold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     var doneButton = {
         let button = UIButton()
@@ -36,9 +44,15 @@ class ChainLinkViewController: UIViewController {
             view.centerXAnchor.constraint(equalTo: doneButton.centerXAnchor),
             view.centerYAnchor.constraint(equalTo: doneButton.centerYAnchor),
         ])
+        
+        view.addSubview(header)
+        NSLayoutConstraint.activate([
+            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: header.topAnchor, constant: -40),
+            view.centerXAnchor.constraint(equalTo: header.centerXAnchor),
+        ])
     }
     
     @objc func doneButtonTap() {
-        delegate?.chainLinkControllerDidFinish(self)
+        delegate?.chainLink1ControllerDidFinish(self)
     }
 }

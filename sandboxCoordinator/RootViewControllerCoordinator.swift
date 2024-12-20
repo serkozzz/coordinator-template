@@ -7,18 +7,19 @@
 
 import UIKit
 
-class RootViewControllerCoordinator: Coordinator, ChainLinkViewControllerCoordinatorDelegate {
+class RootViewControllerCoordinator: Coordinator, ChainLink1ViewControllerCoordinatorDelegate {
+
 
     
     var window: UIWindow!
     weak var viewController: RootViewController?
     
     lazy var redViewControllerCoordinator = RedViewControllerCoordinator()
-    lazy var blueViewControllerCoordinator = ChainLinkViewControllerCoordinator()
-    lazy var blueViewController2Coordinator = ChainLinkViewControllerCoordinator()
+    lazy var chainLink1ControllerCoordinator = ChainLink1ViewControllerCoordinator()
+    lazy var chainLink2ControllerCoordinator = ChainLink2ViewControllerCoordinator()
    
     init() {
-        blueViewControllerCoordinator.delegate = self
+        chainLink1ControllerCoordinator.delegate = self
     }
     
     func show(from vc: UIViewController?) {
@@ -35,10 +36,10 @@ class RootViewControllerCoordinator: Coordinator, ChainLinkViewControllerCoordin
     }
     
     func addChain(for controller: UIViewController) {
-        blueViewControllerCoordinator.show(from: controller)
+        chainLink1ControllerCoordinator.show(from: controller)
     }
     
-    func chainLinkControllerDidFinish() {
-        blueViewController2Coordinator.show(from: self.viewController)
+    func chainLink1ControllerDidFinish() {
+        chainLink2ControllerCoordinator.show(from: self.viewController)
     }
 }
